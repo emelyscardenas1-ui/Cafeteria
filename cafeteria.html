@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Café Luna — Cafetería</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+
+<style>
+
+/* ============================================
+VARIABLES Y RESET
+============================================ */
+:root {
+--cafe: #3b1f0e;
+--crema: #f5ede0;
+--dorado: #c8943a;
+--claro: #fdf8f2;
+--gris: #7a6a5a;
+}
+
+* {
+/* MODELO DE CAJA: border-box hace que padding y border
+no aumenten el tamaño total del elemento */
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+body {
+/* TIPOGRAFÍA: fuente general de la página */
+font-family: 'DM Sans', sans-serif;
+font-size: 16px;
+line-height: 1.6;
+color: var(--cafe);
+
+/* COLORES Y FONDOS */
+background-color: var(--claro);
+}
+
+
+/* ============================================
+HERO — POSICIONAMIENTO + FLEXBOX
+============================================ */
+.hero {
+/* COLORES Y FONDOS: fondo con imagen de gradiente */
+background-image: linear-gradient(to bottom right, #3b1f0e, #7a4520);
+color: var(--crema);
+
+/* MODELO DE CAJA: padding interno generoso */
+padding: 80px 40px;
+
+/* POSICIONAMIENTO: relative para que elementos hijos
+puedan usar position absolute */
+position: relative;
+overflow: hidden;
+
+/* FLEXBOX: centra el contenido verticalmente */
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+min-height: 380px;
+}
+
+/* Círculo decorativo — POSICIONAMIENTO absolute */
+.hero::before {
+content: '';
+position: absolute;
+top: -60px;
+right: -60px;
+width: 280px;
+height: 280px;
+border-radius: 50%;
+background-color: rgba(200, 148, 58, 0.15);
+/* z-index: queda detrás del texto */
+z-index: 0;
+}
+
+.hero-contenido {
+position: relative;
+z-index: 1;
+}
+
+.hero h1 {
+/* TIPOGRAFÍA */
+font-family: 'Playfair Display', serif;
+font-size: 3.5rem;
+font-weight: 900;
+line-height: 1.1;
+color: var(--crema);
+}
+
+.hero h1 span {
+color: var(--dorado);
+}
+
+.hero p {
+font-size: 1.05rem;
+color: #d4b896;
+margin-top: 14px;
+max-width: 400px;
+}
+
+.badge {
+/* MODELO DE CAJA: padding y border visibles */
+display: inline-block;
+padding: 6px 16px;
+border: 2px solid var(--dorado);
+border-radius: 20px;
+margin-bottom: 16px;
+
+/* TIPOGRAFÍA */
+font-size: 0.78rem;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(--dorado);
+}
+
+
+/* ============================================
+SECCIÓN: NUESTROS CAFÉS
+============================================ */
+.seccion {
+/* MODELO DE CAJA */
+padding: 60px 40px;
+max-width: 900px;
+margin: 0 auto;
+}
+
+.seccion-titulo {
+/* TIPOGRAFÍA */
+font-family: 'Playfair Display', serif;
+font-size: 2rem;
+font-weight: 700;
+margin-bottom: 8px;
+color: var(--cafe);
+}
+
+.seccion-subtitulo {
+font-size: 0.9rem;
+color: var(--gris);
+margin-bottom: 36px;
+}
+
+/* FLEXBOX: tarjetas en fila */
+.tarjetas {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+gap: 20px;
+flex-wrap: wrap;
+}
+
+.tarjeta {
+/* MODELO DE CAJA: padding, border y margin bien definidos */
+flex: 1;
+min-width: 220px;
+padding: 28px 24px;
+border: 2px solid #e8d9c5;
+border-radius: 16px;
+margin-bottom: 10px;
+
+/* COLORES Y FONDOS */
+background-color: white;
+
+/* POSICIONAMIENTO: relative para la etiqueta */
+position: relative;
+
+/* TIPOGRAFÍA */
+text-align: center;
+}
+
+.tarjeta:hover {
+border-color: var(--dorado);
+background-color: #fffaf4;
+}
+
+/* Etiqueta "Popular" — POSICIONAMIENTO absolute */
+.popular-tag {
+position: absolute;
+top: -12px;
+left: 50%;
+transform: translateX(-50%);
+
+/* MODELO DE CAJA */
+padding: 4px 14px;
+border-radius: 10px;
+
+/* COLORES Y FONDOS */
+background-color: var(--dorado);
+color: white;
+
+/* TIPOGRAFÍA */
+font-size: 0.7rem;
+font-weight: 500;
+letter-spacing: 1px;
+text-transform: uppercase;
+
+/* z-index: encima de la tarjeta */
+z-index: 2;
+}
+
+.tarjeta-emoji {
+font-size: 2.6rem;
+margin-bottom: 12px;
+display: block;
+}
+
+.tarjeta h3 {
+/* TIPOGRAFÍA */
+font-family: 'Playfair Display', serif;
+font-size: 1.2rem;
+margin-bottom: 6px;
+color: var(--cafe);
+}
+
+.tarjeta p {
+font-size: 0.85rem;
+color: var(--gris);
+line-height: 1.5;
+margin-bottom: 16px;
+}
+
+.precio {
+font-size: 1.1rem;
+font-weight: 500;
+color: var(--dorado);
+}
+
+
+/* ============================================
+SEPARADOR
+============================================ */
+.separador {
+/* MODELO DE CAJA */
+margin: 0 40px;
+border: none;
+border-top: 2px solid #e8d9c5;
+}
+
+
+/* ============================================
+SECCIÓN: SOBRE NOSOTROS — FLEXBOX
+============================================ */
+.sobre {
+padding: 60px 40px;
+max-width: 900px;
+margin: 0 auto;
+
+/* FLEXBOX: texto e imagen lado a lado */
+display: flex;
+flex-direction: row;
+align-items: center;
+gap: 40px;
+}
+
+.sobre-texto {
+flex: 1;
+}
+
+.sobre-texto h2 {
+font-family: 'Playfair Display', serif;
+font-size: 1.8rem;
+margin-bottom: 12px;
+color: var(--cafe);
+}
+
+.sobre-texto p {
+font-size: 0.92rem;
+color: var(--gris);
+line-height: 1.8;
+margin-bottom: 12px;
+}
+
+/* Imagen decorativa — COLORES Y FONDOS + MODELO DE CAJA */
+.sobre-imagen {
+flex: 0 0 220px;
+height: 220px;
+border-radius: 50%;
+background-image: linear-gradient(135deg, #c8943a, #3b1f0e);
+
+/* POSICIONAMIENTO: relative para el texto encima */
+position: relative;
+
+/* FLEXBOX: centra el texto */
+display: flex;
+align-items: center;
+justify-content: center;
+
+/* MODELO DE CAJA */
+border: 6px solid var(--crema);
+box-shadow: 0 8px 32px rgba(59,31,14,0.18);
+}
+
+.sobre-imagen span {
+font-size: 4rem;
+/* z-index: encima del fondo */
+position: relative;
+z-index: 1;
+}
+
+
+/* ============================================
+FOOTER
+============================================ */
+footer {
+/* COLORES Y FONDOS */
+background-color: var(--cafe);
+color: var(--crema);
+
+/* MODELO DE CAJA */
+padding: 30px 40px;
+
+/* FLEXBOX */
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 12px;
+}
+
+footer p {
+font-size: 0.85rem;
+/* COLORES: opacity para texto secundario */
+opacity: 0.7;
+}
+
+footer strong {
+/* TIPOGRAFÍA */
+font-family: 'Playfair Display', serif;
+font-size: 1.1rem;
+color: var(--dorado);
+opacity: 1;
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- HERO -->
+
+<header class="hero">
+<div class="hero-contenido">
+<span class="badge">Desde 2018</span>
+<h1>Café <span>Luna</span></h1>
+<p>El mejor café de la ciudad, hecho con amor y los mejores granos del mundo.</p>
+</div>
+</header>
+
+<!-- MENÚ -->
+
+<section class="seccion">
+<h2 class="seccion-titulo">Nuestros Cafés</h2>
+<p class="seccion-subtitulo">Cada taza, una experiencia diferente.</p>
+
+```
+<div class="tarjetas">
+
+<div class="tarjeta">
+<span class="tarjeta-emoji">☕</span>
+<h3>Espresso</h3>
+<p>Concentrado, intenso y con notas de chocolate oscuro.</p>
+<span class="precio">$3.500</span>
+</div>
+
+<div class="tarjeta">
+<div class="popular-tag">Popular</div>
+<span class="tarjeta-emoji">🥛</span>
+<h3>Latte</h3>
+<p>Espresso suave con leche cremosa vaporizada al momento.</p>
+<span class="precio">$5.000</span>
+</div>
+
+<div class="tarjeta">
+<span class="tarjeta-emoji">🍵</span>
+<h3>Matcha Latte</h3>
+<p>Para los que prefieren algo diferente, fresco y saludable.</p>
+<span class="precio">$6.000</span>
+</div>
+
+</div>
+```
+
+</section>
+
+<hr class="separador"/>
+
+<!-- SOBRE NOSOTROS -->
+
+<div class="sobre">
+<div class="sobre-texto">
+<h2>¿Quiénes somos?</h2>
+<p>
+Somos una cafetería familiar ubicada en el corazón de la ciudad.
+Llevamos más de 6 años trayendo los mejores granos de Colombia,
+Etiopía y Brasil para ofrecerte una taza única cada día.
+</p>
+<p>
+Creemos que el café es más que una bebida — es una pausa,
+un momento para respirar y reconectar.
+</p>
+</div>
+<div class="sobre-imagen">
+<span>☕</span>
+</div>
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+<strong>Café Luna</strong>
+<p>© 2024 — Todos los derechos reservados</p>
+<p>Lunes a Sábado · 7am – 8pm</p>
+</footer>
+
+</body>
+</html>
